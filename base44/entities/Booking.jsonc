@@ -1,0 +1,166 @@
+{
+  "name": "Booking",
+  "type": "object",
+  "properties": {
+    "session_id": {
+      "type": "string",
+      "description": "Unikalny ID sesji (np. SES-20260601-001)"
+    },
+    "service_id": {
+      "type": "string",
+      "description": "ID powi\u0105zanej us\u0142ugi (opcjonalne)"
+    },
+    "service_name": {
+      "type": "string",
+      "description": "Nazwa us\u0142ugi (cache)"
+    },
+    "client_name": {
+      "type": "string"
+    },
+    "client_email": {
+      "type": "string"
+    },
+    "client_phone": {
+      "type": "string"
+    },
+    "artist_id": {
+      "type": "string"
+    },
+    "artist_name": {
+      "type": "string"
+    },
+    "session_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "session_time": {
+      "type": "string"
+    },
+    "session_end_time": {
+      "type": "string",
+      "description": "End time of the session (HH:MM)"
+    },
+    "session_duration": {
+      "type": "number",
+      "description": "Duration in minutes"
+    },
+    "tattoo_description": {
+      "type": "string"
+    },
+    "tattoo_placement": {
+      "type": "string"
+    },
+    "reference_images": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "estimated_price": {
+      "type": "number"
+    },
+    "deposit_paid": {
+      "type": "boolean",
+      "default": false,
+      "description": "Przechowywane dla kompatybilno\u015bci \u2014 true gdy deposit_amount > 0"
+    },
+    "deposit_amount": {
+      "type": "number",
+      "default": 0,
+      "description": "Kwota zaliczki (cz\u0119\u015b\u0107 finalnej kwoty)"
+    },
+    "final_amount": {
+      "type": "number",
+      "description": "Fina\u0142na kwota rozliczenia sesji"
+    },
+    "payment_breakdown": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "method": {
+            "type": "string",
+            "enum": [
+              "cash",
+              "card",
+              "voucher"
+            ]
+          },
+          "amount": {
+            "type": "number"
+          }
+        }
+      },
+      "description": "Podzia\u0142 p\u0142atno\u015bci wg metody (got\u00f3wka/karta/voucher)"
+    },
+    "is_settled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Czy sesja zosta\u0142a rozliczona"
+    },
+    "settled_by_id": {
+      "type": "string",
+      "description": "ID u\u017cytkownika, kt\u00f3ry rozliczy\u0142 sesj\u0119"
+    },
+    "settled_by_name": {
+      "type": "string",
+      "description": "Imi\u0119/nazwa osoby rozliczaj\u0105cej (cache)"
+    },
+    "settled_date": {
+      "type": "string",
+      "description": "Data rozliczenia (ISO)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "confirmed",
+        "completed",
+        "cancelled"
+      ],
+      "default": "pending"
+    },
+    "health_form_completed": {
+      "type": "boolean",
+      "default": false
+    },
+    "health_form_token": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Notatki od klienta (z formularza online)"
+    },
+    "admin_notes": {
+      "type": "string",
+      "description": "Notatki admina dla tej sesji"
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "online_form",
+        "dashboard"
+      ],
+      "default": "dashboard",
+      "description": "\u0179r\u00f3d\u0142o rezerwacji: online_form = klient sam przez formularz, dashboard = admin/artysta"
+    },
+    "gcal_event_id": {
+      "type": "string",
+      "description": "ID wydarzenia w Google Calendar (do synchronizacji)"
+    },
+    "last_editor": {
+      "type": "string",
+      "enum": [
+        "client",
+        "dashboard",
+        "change_request"
+      ],
+      "description": "Kto ostatnio edytowa\u0142 szczeg\u00f3\u0142y sesji: client = klient w panelu, dashboard = admin/artysta, change_request = zmiana przez pro\u015bb\u0119 o zmian\u0119 terminu (t\u0142umi maila aktualizacji \u2014 maile id\u0105 z manageChangeRequest)."
+    }
+  },
+  "required": [
+    "client_name",
+    "client_email",
+    "session_date"
+  ]
+}

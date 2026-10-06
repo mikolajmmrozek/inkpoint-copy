@@ -1,0 +1,64 @@
+{
+  "name": "ArtistAvailability",
+  "type": "object",
+  "properties": {
+    "artist_id": {
+      "type": "string",
+      "description": "ID artysty"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "recurring",
+        "exception"
+      ],
+      "description": "recurring = sta\u0142y grafik tygodniowy, exception = blokada/wyj\u0105tek na konkretny dzie\u0144"
+    },
+    "day_of_week": {
+      "type": "number",
+      "description": "Dzie\u0144 tygodnia dla recurring: 0=Niedziela, 1=Poniedzia\u0142ek, ..., 6=Sobota"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Data startowa wpisu (dla exception: konkretny dzie\u0144 lub start powtarzania)"
+    },
+    "start_time": {
+      "type": "string",
+      "description": "Godzina rozpocz\u0119cia (HH:MM)"
+    },
+    "end_time": {
+      "type": "string",
+      "description": "Godzina zako\u0144czenia (HH:MM)"
+    },
+    "is_available": {
+      "type": "boolean",
+      "default": true,
+      "description": "true = dost\u0119pny, false = zablokowany"
+    },
+    "note": {
+      "type": "string",
+      "description": "Opcjonalna notatka (np. urlop, dentysta)"
+    },
+    "repeat": {
+      "type": "string",
+      "enum": [
+        "none",
+        "weekly",
+        "biweekly",
+        "monthly"
+      ],
+      "default": "none",
+      "description": "Cz\u0119stotliwo\u015b\u0107 powtarzania wpisu"
+    },
+    "repeat_until": {
+      "type": "string",
+      "description": "Data zako\u0144czenia powtarzania (YYYY-MM-DD) lub 'indefinite'"
+    }
+  },
+  "required": [
+    "artist_id",
+    "type",
+    "is_available"
+  ]
+}

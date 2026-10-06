@@ -1,0 +1,334 @@
+{
+  "name": "HealthForm",
+  "type": "object",
+  "properties": {
+    "booking_id": {
+      "type": "string",
+      "description": "ID powi\u0105zanej rezerwacji (opcjonalne \u2014 ankieta mo\u017ce by\u0107 wype\u0142niona bez rezerwacji)"
+    },
+    "client_first_name": {
+      "type": "string"
+    },
+    "client_last_name": {
+      "type": "string"
+    },
+    "client_name": {
+      "type": "string"
+    },
+    "client_email": {
+      "type": "string"
+    },
+    "client_phone": {
+      "type": "string"
+    },
+    "date_of_birth": {
+      "type": "string",
+      "format": "date"
+    },
+    "address_street": {
+      "type": "string"
+    },
+    "address_city": {
+      "type": "string"
+    },
+    "address_postal_code": {
+      "type": "string"
+    },
+    "pesel": {
+      "type": "string"
+    },
+    "id_document": {
+      "type": "string"
+    },
+    "has_heart_condition": {
+      "type": "boolean"
+    },
+    "has_heart_condition_desc": {
+      "type": "string"
+    },
+    "heart_condition_description": {
+      "type": "string"
+    },
+    "has_kidney_condition": {
+      "type": "boolean"
+    },
+    "has_kidney_condition_desc": {
+      "type": "string"
+    },
+    "kidney_condition_description": {
+      "type": "string"
+    },
+    "has_liver_condition": {
+      "type": "boolean"
+    },
+    "has_liver_condition_desc": {
+      "type": "string"
+    },
+    "liver_condition_description": {
+      "type": "string"
+    },
+    "has_lung_condition": {
+      "type": "boolean"
+    },
+    "has_lung_condition_desc": {
+      "type": "string"
+    },
+    "lung_condition_description": {
+      "type": "string"
+    },
+    "has_cancer": {
+      "type": "boolean"
+    },
+    "has_cancer_desc": {
+      "type": "string"
+    },
+    "cancer_description": {
+      "type": "string"
+    },
+    "has_infectious_diseases": {
+      "type": "boolean"
+    },
+    "has_infectious_diseases_desc": {
+      "type": "string"
+    },
+    "infectious_diseases_description": {
+      "type": "string"
+    },
+    "has_epilepsy": {
+      "type": "boolean"
+    },
+    "has_epilepsy_desc": {
+      "type": "string"
+    },
+    "epilepsy_description": {
+      "type": "string"
+    },
+    "has_diabetes": {
+      "type": "boolean"
+    },
+    "has_diabetes_desc": {
+      "type": "string"
+    },
+    "diabetes_description": {
+      "type": "string"
+    },
+    "has_hemophilia": {
+      "type": "boolean"
+    },
+    "has_hemophilia_desc": {
+      "type": "string"
+    },
+    "hemophilia_description": {
+      "type": "string"
+    },
+    "has_allergies": {
+      "type": "boolean"
+    },
+    "has_allergies_desc": {
+      "type": "string"
+    },
+    "allergies_description": {
+      "type": "string"
+    },
+    "has_inflammatory_conditions": {
+      "type": "boolean"
+    },
+    "has_inflammatory_conditions_desc": {
+      "type": "string"
+    },
+    "inflammatory_conditions_description": {
+      "type": "string"
+    },
+    "has_skin_conditions": {
+      "type": "boolean"
+    },
+    "has_skin_conditions_desc": {
+      "type": "string"
+    },
+    "skin_conditions_description": {
+      "type": "string"
+    },
+    "has_mental_conditions": {
+      "type": "boolean"
+    },
+    "has_mental_conditions_desc": {
+      "type": "string"
+    },
+    "mental_conditions_description": {
+      "type": "string"
+    },
+    "is_pregnant": {
+      "type": "boolean"
+    },
+    "is_pregnant_desc": {
+      "type": "string"
+    },
+    "is_under_alcohol_drug_influence": {
+      "type": "boolean"
+    },
+    "is_under_alcohol_drug_influence_desc": {
+      "type": "string"
+    },
+    "is_allergic_to_metals_dyes_latex": {
+      "type": "boolean"
+    },
+    "is_allergic_to_metals_dyes_latex_desc": {
+      "type": "string"
+    },
+    "allergies_metals_dyes_latex_description": {
+      "type": "string"
+    },
+    "has_blood_clotting_disorders": {
+      "type": "boolean"
+    },
+    "has_blood_clotting_disorders_desc": {
+      "type": "string"
+    },
+    "blood_clotting_disorders_description": {
+      "type": "string"
+    },
+    "has_scars_skin_changes": {
+      "type": "boolean"
+    },
+    "has_scars_skin_changes_desc": {
+      "type": "string"
+    },
+    "scars_skin_changes_description": {
+      "type": "string"
+    },
+    "had_tattoo_piercing_before": {
+      "type": "boolean"
+    },
+    "had_tattoo_piercing_before_desc": {
+      "type": "string"
+    },
+    "previous_reactions_description": {
+      "type": "string"
+    },
+    "has_other_chronic_diseases": {
+      "type": "boolean"
+    },
+    "has_other_chronic_diseases_desc": {
+      "type": "string"
+    },
+    "procedure_q1": {
+      "type": "boolean"
+    },
+    "procedure_q2": {
+      "type": "boolean"
+    },
+    "procedure_q2_desc": {
+      "type": "string"
+    },
+    "procedure_q_1780258468164": {
+      "type": "boolean"
+    },
+    "procedure_q_1780258468164_desc": {
+      "type": "string"
+    },
+    "procedure_q_1780258502043": {
+      "type": "boolean"
+    },
+    "procedure_q_1780258539127": {
+      "type": "boolean"
+    },
+    "procedure_q_1780258600027": {
+      "type": "boolean"
+    },
+    "procedure_q_1780258600027_desc": {
+      "type": "string"
+    },
+    "procedure_q_1780258617059": {
+      "type": "boolean"
+    },
+    "procedure_q_1780258617059_desc": {
+      "type": "string"
+    },
+    "procedure_q_1780258627893": {
+      "type": "boolean"
+    },
+    "procedure_q_1780258627893_desc": {
+      "type": "string"
+    },
+    "declaration_of_will": {
+      "type": "boolean"
+    },
+    "consent_tattoo_piercing": {
+      "type": "boolean"
+    },
+    "confirm_sober": {
+      "type": "boolean"
+    },
+    "consent_image_use": {
+      "type": "boolean"
+    },
+    "confirm_regulations_read": {
+      "type": "boolean"
+    },
+    "consent_1779995760853": {
+      "type": "boolean"
+    },
+    "consent_1779995809081": {
+      "type": "boolean"
+    },
+    "consent_1779995841314": {
+      "type": "boolean"
+    },
+    "consent_1779995923833": {
+      "type": "boolean"
+    },
+    "client_signature": {
+      "type": "string"
+    },
+    "form_filled_date": {
+      "type": "string"
+    },
+    "is_minor": {
+      "type": "boolean",
+      "default": false
+    },
+    "guardian_consent_form_id": {
+      "type": "string"
+    },
+    "previous_form_id": {
+      "type": "string",
+      "description": "ID of previous form if reusing unchanged medical data"
+    },
+    "is_update_only": {
+      "type": "boolean",
+      "default": false,
+      "description": "If true, medical data unchanged, only session info updated"
+    },
+    "procedure_type": {
+      "type": "string",
+      "enum": [
+        "TATUA\u017b",
+        "PIERCING"
+      ]
+    },
+    "body_placement": {
+      "type": "string"
+    },
+    "is_draft": {
+      "type": "boolean",
+      "default": false,
+      "description": "True if form is incomplete / in progress"
+    },
+    "is_read": {
+      "type": "boolean",
+      "default": false,
+      "description": "Czy ankieta zosta\u0142a przeczytana przez admina"
+    }
+  },
+  "required": [
+    "client_name",
+    "client_email",
+    "date_of_birth",
+    "client_signature",
+    "form_filled_date",
+    "consent_tattoo_piercing",
+    "confirm_sober",
+    "confirm_regulations_read"
+  ],
+  "additionalProperties": true
+}

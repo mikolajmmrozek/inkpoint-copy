@@ -1,0 +1,33 @@
+{
+  "name": "Instruction",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "aftercare_tattoo",
+        "aftercare_piercing",
+        "before_tattoo",
+        "before_piercing",
+        "after_piercing"
+      ],
+      "description": "Typ instrukcji"
+    },
+    "title": {
+      "type": "string",
+      "description": "Tytu\u0142 instrukcji"
+    },
+    "content": {
+      "type": "string",
+      "description": "Tre\u015b\u0107 instrukcji (HTML lub tekst)"
+    },
+    "translations": {
+      "type": "object",
+      "description": "Cached translations keyed by language code, e.g. { en: { title, content }, de: { title, content } }"
+    }
+  },
+  "required": [
+    "type",
+    "title"
+  ]
+}

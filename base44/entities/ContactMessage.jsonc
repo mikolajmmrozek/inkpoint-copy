@@ -1,0 +1,78 @@
+{
+  "name": "ContactMessage",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string",
+      "description": "Email klienta \u2014 s\u0142u\u017cy jako identyfikator w\u0105tku"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "subject": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    },
+    "is_read": {
+      "type": "boolean",
+      "default": false
+    },
+    "sender_type": {
+      "type": "string",
+      "enum": [
+        "client",
+        "admin",
+        "system"
+      ],
+      "default": "client",
+      "description": "Kto wysy\u0142a\u0142 wiadomo\u015b\u0107: client, admin, system"
+    },
+    "message_type": {
+      "type": "string",
+      "enum": [
+        "text",
+        "booking_card",
+        "status_change"
+      ],
+      "default": "text",
+      "description": "Typ wiadomo\u015bci: text, booking_card (karta rezerwacji), status_change (zmiana statusu)"
+    },
+    "booking_id": {
+      "type": "string",
+      "description": "ID powi\u0105zanej rezerwacji (dla kart rezerwacji i zmian statusu)"
+    },
+    "attachments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "image",
+              "pdf",
+              "file"
+            ]
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Za\u0142\u0105czniki (zdj\u0119cia, PDF, pliki)"
+    }
+  },
+  "required": [
+    "name",
+    "email",
+    "message"
+  ]
+}

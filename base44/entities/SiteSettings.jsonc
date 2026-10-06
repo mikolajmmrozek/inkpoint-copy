@@ -1,0 +1,154 @@
+{
+  "name": "SiteSettings",
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "Unique key"
+    },
+    "hero_video_url": {
+      "type": "string"
+    },
+    "hero_tagline": {
+      "type": "string"
+    },
+    "hero_subtext": {
+      "type": "string"
+    },
+    "about_heading": {
+      "type": "string"
+    },
+    "about_highlight_word": {
+      "type": "string"
+    },
+    "about_paragraph_1": {
+      "type": "string"
+    },
+    "about_paragraph_2": {
+      "type": "string"
+    },
+    "about_image_url": {
+      "type": "string"
+    },
+    "about_stats_number": {
+      "type": "string"
+    },
+    "about_stats_text": {
+      "type": "string"
+    },
+    "contact_email": {
+      "type": "string"
+    },
+    "contact_address_street": {
+      "type": "string"
+    },
+    "contact_address_city": {
+      "type": "string"
+    },
+    "contact_phone": {
+      "type": "string"
+    },
+    "contact_hours": {
+      "type": "string"
+    },
+    "contact_instagram": {
+      "type": "string"
+    },
+    "contact_instagram_url": {
+      "type": "string"
+    },
+    "contact_facebook": {
+      "type": "string"
+    },
+    "contact_facebook_url": {
+      "type": "string"
+    },
+    "contact_youtube": {
+      "type": "string",
+      "description": "YouTube channel name"
+    },
+    "contact_youtube_url": {
+      "type": "string",
+      "description": "YouTube channel URL"
+    },
+    "contact_tiktok": {
+      "type": "string",
+      "description": "TikTok profile name"
+    },
+    "contact_tiktok_url": {
+      "type": "string",
+      "description": "TikTok profile URL"
+    },
+    "contact_google_maps_url": {
+      "type": "string"
+    },
+    "site_logo_url": {
+      "type": "string"
+    },
+    "app_icon_url": {
+      "type": "string"
+    },
+    "app_description": {
+      "type": "string"
+    },
+    "theme_mode": {
+      "type": "string",
+      "enum": [
+        "dark",
+        "light"
+      ],
+      "default": "dark",
+      "description": "Motyw strony publicznej: dark = ciemny, light = jasny"
+    },
+    "primary_color": {
+      "type": "string",
+      "default": "#FF007F",
+      "description": "Kolor wiod\u0105cy (hex)"
+    },
+    "font_package": {
+      "type": "string",
+      "enum": [
+        "original",
+        "classic",
+        "elegant",
+        "modern",
+        "fraunces"
+      ],
+      "default": "original",
+      "description": "Pakiet czcionek: original, classic, elegant, modern, fraunces"
+    },
+    "corner_radius": {
+      "type": "string",
+      "enum": [
+        "sharp",
+        "soft",
+        "rounded"
+      ],
+      "default": "sharp",
+      "description": "Promie\u0144 naro\u017cnik\u00f3w: sharp=ostre, soft=delikatnie zaokr\u0105glone, rounded=zaokr\u0105glone"
+    },
+    "border_thickness": {
+      "type": "string",
+      "enum": [
+        "needle",
+        "thin",
+        "bold"
+      ],
+      "default": "needle",
+      "description": "Grubo\u015b\u0107 ramek: needle=iglaste 0.5px, thin=cienkie 1px, bold=wyra\u017ane 2px"
+    },
+    "image_border_style": {
+      "type": "string",
+      "enum": [
+        "none",
+        "subtle",
+        "solid"
+      ],
+      "default": "none",
+      "description": "Ramka wok\u00f3\u0142 zdj\u0119\u0107: none=brak, subtle=subtelna, solid=solidna"
+    }
+  },
+  "required": [
+    "key"
+  ]
+}

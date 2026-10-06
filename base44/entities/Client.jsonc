@@ -1,0 +1,78 @@
+{
+  "name": "Client",
+  "type": "object",
+  "properties": {
+    "first_name": {
+      "type": "string",
+      "description": "Imi\u0119 klienta"
+    },
+    "last_name": {
+      "type": "string",
+      "description": "Nazwisko klienta"
+    },
+    "name": {
+      "type": "string",
+      "description": "Pe\u0142ne imi\u0119 i nazwisko"
+    },
+    "email": {
+      "type": "string",
+      "description": "Adres e-mail klienta"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Numer telefonu"
+    },
+    "avatar_url": {
+      "type": "string",
+      "description": "URL zdj\u0119cia profilowego klienta (uploadowane przez klienta w panelu lub pobrane od dostawcy logowania, np. Google)"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Notatki o kliencie (alergie, preferencje itp.)"
+    },
+    "total_sessions": {
+      "type": "number",
+      "default": 0,
+      "description": "Liczba sesji"
+    },
+    "user_id": {
+      "type": "string",
+      "description": "ID powi\u0105zanego konta u\u017cytkownika (Base44 User)"
+    },
+    "invite_sent": {
+      "type": "boolean",
+      "default": false,
+      "description": "Czy wys\u0142ano zaproszenie do aplikacji"
+    },
+    "invite_sent_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Data wys\u0142ania zaproszenia"
+    },
+    "last_login": {
+      "type": "string",
+      "description": "Data ostatniego logowania klienta (ISO)"
+    },
+    "is_read": {
+      "type": "boolean",
+      "default": false,
+      "description": "Czy profil klienta zosta\u0142 ju\u017c przejrzany przez admina (do wska\u017anika \"nowi klienci\")"
+    },
+    "is_blocked": {
+      "type": "boolean",
+      "default": false,
+      "description": "Czy klient jest zablokowany \u2014 traci mo\u017cliwo\u015b\u0107 rezerwacji sesji i wysy\u0142ania wiadomo\u015bci, bez informowania o blokadzie"
+    },
+    "auth_provider": {
+      "type": "string",
+      "enum": [
+        "google",
+        "email"
+      ],
+      "description": "Dostawca logowania: google = logowanie przez Google OAuth, email = e-mail/has\u0142o"
+    }
+  },
+  "required": [
+    "first_name"
+  ]
+}

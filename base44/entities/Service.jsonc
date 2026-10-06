@@ -1,0 +1,118 @@
+{
+  "name": "Service",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Nazwa us\u0142ugi"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "tattoo",
+        "piercing",
+        "studio"
+      ],
+      "description": "Kategoria us\u0142ugi"
+    },
+    "short_description": {
+      "type": "string",
+      "description": "Kr\u00f3tki opis us\u0142ugi"
+    },
+    "long_description": {
+      "type": "string",
+      "description": "D\u0142ugi opis us\u0142ugi"
+    },
+    "image_url": {
+      "type": "string",
+      "description": "URL zdj\u0119cia us\u0142ugi"
+    },
+    "duration_minutes": {
+      "type": "number",
+      "description": "Czas wykonania w minutach"
+    },
+    "price_type": {
+      "type": "string",
+      "enum": [
+        "fixed",
+        "range"
+      ],
+      "default": "fixed",
+      "description": "Sta\u0142a cena lub zakres"
+    },
+    "price_fixed": {
+      "type": "number",
+      "description": "Sta\u0142a cena (je\u015bli price_type = fixed)"
+    },
+    "price_min": {
+      "type": "number",
+      "description": "Cena minimalna (je\u015bli price_type = range)"
+    },
+    "price_max": {
+      "type": "number",
+      "description": "Cena maksymalna (je\u015bli price_type = range)"
+    },
+    "artist_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Lista ID artyst\u00f3w wykonuj\u0105cych t\u0119 us\u0142ug\u0119"
+    },
+    "hidden_from_clients": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [],
+      "description": "Lista ID artyst\u00f3w, dla kt\u00f3rych ta us\u0142uga jest ukryta przed klientem w rezerwacji online. Admin i sam artysta nadal widz\u0105 i mog\u0105 zapisywa\u0107. Pusta lub brak = widoczna dla wszystkich."
+    },
+    "visibility": {
+      "type": "string",
+      "enum": [
+        "public",
+        "members_only",
+        "hidden"
+      ],
+      "default": "public",
+      "description": "public = wszyscy, members_only = tylko zalogowani, hidden = ukryta"
+    },
+    "members_only": {
+      "type": "boolean",
+      "default": false,
+      "description": "Tylko dla zalogowanych u\u017cytkownik\u00f3w"
+    },
+    "min_advance_booking": {
+      "type": "object",
+      "description": "Minimalne wyprzedzenie przed rezerwacj\u0105",
+      "properties": {
+        "unit": {
+          "type": "string",
+          "enum": [
+            "minutes",
+            "hours",
+            "days"
+          ],
+          "description": "Jednostka czasu"
+        },
+        "value": {
+          "type": "number",
+          "description": "Warto\u015b\u0107 (np. 30 minut, 2 godziny, 14 dni)"
+        }
+      }
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Czy us\u0142uga jest aktywna"
+    },
+    "order": {
+      "type": "number",
+      "default": 999,
+      "description": "Kolejno\u015b\u0107 wy\u015bwietlania"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

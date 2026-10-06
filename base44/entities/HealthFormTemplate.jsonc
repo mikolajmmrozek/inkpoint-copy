@@ -1,0 +1,141 @@
+{
+  "name": "HealthFormTemplate",
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string",
+      "default": "default",
+      "description": "Unique template key"
+    },
+    "section_intros": {
+      "type": "object",
+      "description": "Intro texts shown at top of each section in the form",
+      "properties": {
+        "medical": {
+          "type": "string"
+        },
+        "procedure": {
+          "type": "string"
+        },
+        "declaration": {
+          "type": "string"
+        },
+        "consents": {
+          "type": "string"
+        }
+      }
+    },
+    "medical_fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "field_key": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean",
+            "default": false
+          },
+          "has_description": {
+            "type": "boolean",
+            "default": true
+          }
+        }
+      },
+      "description": "Array of medical condition fields"
+    },
+    "procedure_questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "field_key": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean",
+            "default": false
+          },
+          "has_description": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "description": "Array of procedure-related questions"
+    },
+    "declaration_of_will": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        },
+        "field_key": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "required": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "description": "Declaration of will content and field"
+    },
+    "declaration_fields": {
+      "type": "array",
+      "description": "Additional custom input fields in declaration section",
+      "items": {
+        "type": "object",
+        "properties": {
+          "field_key": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "placeholder": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      }
+    },
+    "consent_fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "field_key": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean",
+            "default": true
+          }
+        }
+      },
+      "description": "Array of consent fields"
+    }
+  },
+  "required": [
+    "key"
+  ]
+}
