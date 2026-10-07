@@ -19,31 +19,32 @@ const inputStyle = {
 const DEFAULTS = {
   hero: {
     key: 'hero',
-    hero_tagline: 'ROMANS\nTATTOO',
-    hero_subtext: 'Studio tatuażu i piercingu w Wolsztynie.\nSztuka trwała — precyzyjna — Twoja.',
+    hero_tagline: 'STUDIO\nTATTOO',
+    hero_subtext: 'Studio tatuażu i piercingu.\nSztuka trwała — precyzyjna — Twoja.',
     hero_video_url: '',
   },
   about: {
     key: 'about',
     about_heading: 'Sztuka, która',
     about_highlight_word: 'POZOSTAJE',
-    about_paragraph_1: 'Romans Tattoo to studio tatuażu i piercingu w Wolsztynie, gdzie precyzja spotyka pasję. Nasi artyści łączą doświadczenie z nieustannym dążeniem do perfekcji, tworząc dzieła dopasowane do każdego klienta.',
+    about_paragraph_1: 'Studio tatuażu i piercingu, gdzie precyzja spotyka pasję. Nasi artyści łączą doświadczenie z nieustannym dążeniem do perfekcji, tworząc dzieła dopasowane do każdego klienta.',
     about_paragraph_2: 'Każda sesja zaczyna się od rozmowy. Słuchamy, projektujemy, tworzymy.',
     about_image_url: 'https://images.unsplash.com/photo-1565058379802-bbe93b2f703a?w=800&q=85',
     about_stats_number: '4+',
-    about_stats_text: 'W WOLSZTYNIE',
+    about_stats_text: '',
   },
   contact: {
     key: 'contact',
-    contact_email: 'kontakt@romanstattoo.pl',
-    contact_address_street: 'ul. Wschowska 30',
-    contact_address_city: '64-200 Wolsztyn',
-    contact_phone: '881717880',
-    contact_hours: 'Pon–Sob — umów się\nprzez Instagram',
-    contact_instagram: '@tattoo.romans',
-    contact_instagram_url: 'https://www.instagram.com/tattoo.romans',
-    contact_facebook: 'Romans Tattoo',
-    contact_facebook_url: 'https://www.facebook.com/romanstattoo',
+    contact_email: '',
+    contact_address_street: '',
+    contact_address_city: '',
+    contact_address_country: 'Polska',
+    contact_phone: '',
+    contact_hours: '',
+    contact_instagram: '',
+    contact_instagram_url: '',
+    contact_facebook: '',
+    contact_facebook_url: '',
     contact_google_maps_url: '',
     contact_youtube: '',
     contact_youtube_url: '',
@@ -52,9 +53,12 @@ const DEFAULTS = {
   },
   branding: {
     key: 'branding',
+    site_name: 'Studio Tattoo',
+    site_name_top: 'STUDIO',
+    site_name_bottom: 'TATTOO',
     site_logo_url: '',
     app_icon_url: '',
-    app_description: 'Romans Tattoo — Studio tatuażu i piercingu w Wolsztynie',
+    app_description: 'Studio tatuażu i piercingu',
   },
 };
 
@@ -319,8 +323,19 @@ export default function DashboardSettings() {
               <label className="block mb-2" style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: t.muted, letterSpacing: '0.15em', textTransform: 'uppercase' }}>
                 Miasto i kod
               </label>
-              <input {...inp('contact_address_city')} style={{ ...inputStyle, color: t.text, borderBottomColor: t.border }} onFocus={e => e.target.style.borderBottomColor = 'var(--brand)'} onBlur={e => e.target.style.borderBottomColor = t.border} />
+              <input {...inp('contact_address_city')} placeholder="np. 64-200 Wolsztyn" style={{ ...inputStyle, color: t.text, borderBottomColor: t.border }} onFocus={e => e.target.style.borderBottomColor = 'var(--brand)'} onBlur={e => e.target.style.borderBottomColor = t.border} />
             </div>
+          </div>
+
+          {/* Country */}
+          <div className="mb-8">
+            <label className="block mb-2" style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: t.muted, letterSpacing: '0.15em', textTransform: 'uppercase' }}>
+              Kraj
+            </label>
+            <input {...inp('contact_address_country')} placeholder="np. Polska" style={{ ...inputStyle, color: t.text, borderBottomColor: t.border }} onFocus={e => e.target.style.borderBottomColor = 'var(--brand)'} onBlur={e => e.target.style.borderBottomColor = t.border} />
+            <p className="mt-1" style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: t.muted, letterSpacing: '0.06em' }}>
+              Wyświetlany razem z miastem nad tytułem na stronie głównej i w stopce
+            </p>
           </div>
 
           {/* Contact info */}
@@ -419,6 +434,36 @@ export default function DashboardSettings() {
         <div>
           <p style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: t.fuchsia, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '24px' }}>
             BRANDING I WYGLĄD
+          </p>
+
+          {/* Studio name — full */}
+          <div className="mb-8">
+            <label className="block mb-2" style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: t.muted, letterSpacing: '0.15em', textTransform: 'uppercase' }}>
+              Nazwa studia (pełna)
+            </label>
+            <input {...inp('site_name')} placeholder="np. Studio Tattoo" style={{ ...inputStyle, color: t.text, borderBottomColor: t.border }} onFocus={e => e.target.style.borderBottomColor = 'var(--brand)'} onBlur={e => e.target.style.borderBottomColor = t.border} />
+            <p className="mt-1" style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: t.muted, letterSpacing: '0.06em' }}>
+              Wyświetlana w stopce i w prawach autorskich
+            </p>
+          </div>
+
+          {/* Logo name parts */}
+          <div className="mb-8 grid grid-cols-2 gap-8">
+            <div>
+              <label className="block mb-2" style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: t.muted, letterSpacing: '0.15em', textTransform: 'uppercase' }}>
+                Logo — górna część
+              </label>
+              <input {...inp('site_name_top')} placeholder="np. STUDIO" style={{ ...inputStyle, color: t.text, borderBottomColor: t.border }} onFocus={e => e.target.style.borderBottomColor = 'var(--brand)'} onBlur={e => e.target.style.borderBottomColor = t.border} />
+            </div>
+            <div>
+              <label className="block mb-2" style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: t.muted, letterSpacing: '0.15em', textTransform: 'uppercase' }}>
+                Logo — dolna część
+              </label>
+              <input {...inp('site_name_bottom')} placeholder="np. TATTOO" style={{ ...inputStyle, color: t.text, borderBottomColor: t.border }} onFocus={e => e.target.style.borderBottomColor = 'var(--brand)'} onBlur={e => e.target.style.borderBottomColor = t.border} />
+            </div>
+          </div>
+          <p className="mb-8" style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: t.muted, letterSpacing: '0.06em' }}>
+            Dwie linie widoczne w nawigacji u góry strony. Pozostaw puste, by użyć pełnej nazwy.
           </p>
 
           {/* Logo */}

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Instagram, Facebook, Youtube } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
+import { useSiteSettings, DEFAULT_SITE, getCity, getCountry } from '@/lib/useSiteSettings';
 
 const TikTokIcon = ({ size = 13 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -10,17 +11,15 @@ const TikTokIcon = ({ size = 13 }) => (
 );
 
 export default function Footer() {
-  const [social, setSocial] = useState({ youtube_url: '', tiktok_url: '' });
+  const { settings } = useSiteSettings();
+  const studioName = (settings.site_name || DEFAULT_SITE.site_name || '').toUpperCase();
+  const city = getCity(settings);
+  const country = getCountry(settings);
 
-  useEffect(() => {
-    base44.entities.SiteSettings.filter({ key: 'contact' })
-      .then(res => {
-        if (res.length > 0) {
-          setSocial({ youtube_url: res[0].contact_youtube_url || '', tiktok_url: res[0].contact_tiktok_url || '' });
-        }
-      })
-      .catch(() => {});
-  }, []);
+  const instagramUrl = settings.contact_instagram_url;
+  const facebookUrl = settings.contact_facebook_url;
+  const youtubeUrl = settings.contact_youtube_url;
+  const tiktokUrl = settings.contact_tiktok_url;
 
   return (
     <footer className="border-t mt-0" style={{ borderColor: 'hsl(var(--border))', borderTopWidth: '0.5px', background: 'hsl(var(--background))' }}>
@@ -29,29 +28,33 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="font-display text-4xl font-700 mb-2" style={{ fontFamily: 'var(--font-display)', fontWeight: 400, color: 'hsl(var(--foreground))', fontSize: '2.8rem', letterSpacing: '0.06em' }}>
-              ROMANS TATTOO
+              {studioName}
             </div>
             <p className="text-parchment/40 text-sm mt-4 leading-relaxed" style={{ color: 'rgb(var(--foreground-rgb) / 0.4)', fontSize: '14px' }}>
               Studio tatuażu i piercingu.<br />
-              Wolsztyn, Polska.
+              {[city, country].filter(Boolean).join(', ')}.
             </p>
-            <div className="flex gap-4 mt-6">
-              <a href="https://www.instagram.com/tattoo.romans/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 transition-opacity hover:opacity-80" style={{ color: 'var(--brand)', fontFamily: 'var(--font-mono)', fontSize: '9px', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-                <Instagram size={13} />
-                Instagram
-              </a>
-              <a href="https://www.facebook.com/tattoo.romans.wolsztyn" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 transition-opacity hover:opacity-80" style={{ color: 'var(--brand)', fontFamily: 'var(--font-mono)', fontSize: '9px', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-                <Facebook size={13} />
-                Facebook
-              </a>
-              {social.youtube_url && (
-                <a href={social.youtube_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 transition-opacity hover:opacity-80" style={{ color: 'var(--brand)', fontFamily: 'var(--font-mono)', fontSize: '9px', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+            <div className="flex gap-4 mt-6 flex-wrap">
+              {instagramUrl && (
+                <a href={instagramUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 transition-opacity hover:opacity-80" style={{ color: 'var(--brand)', fontFamily: 'var(--font-mono)', fontSize: '9px', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+                  <Instagram size={13} />
+                  Instagram
+                </a>
+              )}
+              {facebookUrl && (
+                <a href={facebookUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 transition-opacity hover:opacity-80" style={{ color: 'var(--brand)', fontFamily: 'var(--font-mono)', fontSize: '9px', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+                  <Facebook size={13} />
+                  Facebook
+                </a>
+              )}
+              {youtubeUrl && (
+                <a href={youtubeUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 transition-opacity hover:opacity-80" style={{ color: 'var(--brand)', fontFamily: 'var(--font-mono)', fontSize: '9px', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
                   <Youtube size={13} />
                   YouTube
                 </a>
               )}
-              {social.tiktok_url && (
-                <a href={social.tiktok_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 transition-opacity hover:opacity-80" style={{ color: 'var(--brand)', fontFamily: 'var(--font-mono)', fontSize: '9px', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+              {tiktokUrl && (
+                <a href={tiktokUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 transition-opacity hover:opacity-80" style={{ color: 'var(--brand)', fontFamily: 'var(--font-mono)', fontSize: '9px', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
                   <TikTokIcon size={13} />
                   TikTok
                 </a>
@@ -79,17 +82,21 @@ export default function Footer() {
               KONTAKT
             </p>
             <div className="space-y-2 text-sm text-parchment/50" style={{ color: 'rgb(var(--foreground-rgb) / 0.5)', fontSize: '14px' }}>
-              <p>ul. Wschowska 30</p>
-              <p>64-200 Wolsztyn</p>
-              <a href="tel:881717880" className="hover:text-parchment/80 transition-colors" style={{ marginTop: '16px', display: 'block', color: 'var(--brand)' }}>881717880</a>
-              <a href="mailto:tattoo.wolsztyn@gmail.com" className="hover:text-parchment/80 transition-colors" style={{ marginTop: '8px', display: 'block', color: 'var(--brand)', fontSize: '12px' }}>tattoo.wolsztyn@gmail.com</a>
+              {settings.contact_address_street && <p>{settings.contact_address_street}</p>}
+              {settings.contact_address_city && <p>{settings.contact_address_city}</p>}
+              {settings.contact_phone && (
+                <a href={`tel:${settings.contact_phone}`} className="hover:text-parchment/80 transition-colors" style={{ marginTop: '16px', display: 'block', color: 'var(--brand)' }}>{settings.contact_phone}</a>
+              )}
+              {settings.contact_email && (
+                <a href={`mailto:${settings.contact_email}`} className="hover:text-parchment/80 transition-colors" style={{ marginTop: '8px', display: 'block', color: 'var(--brand)', fontSize: '12px' }}>{settings.contact_email}</a>
+              )}
             </div>
           </div>
         </div>
 
         <div className="mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-4" style={{ borderTop: '0.5px solid hsl(var(--border))' }}>
           <p className="text-micro" style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'rgb(var(--foreground-rgb) / 0.3)', letterSpacing: '0.1em' }}>
-            © 2026 ROMANS TATTOO. WSZELKIE PRAWA ZASTRZEŻONE.
+            © {new Date().getFullYear()} {studioName}. WSZELKIE PRAWA ZASTRZEŻONE.
           </p>
         </div>
       </div>

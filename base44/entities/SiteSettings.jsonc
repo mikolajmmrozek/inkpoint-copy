@@ -6,6 +6,18 @@
       "type": "string",
       "description": "Unique key"
     },
+    "site_name": {
+      "type": "string",
+      "description": "Nazwa studia wy\u015bwietlana w nawigacji, stopce i prawach autorskich"
+    },
+    "site_name_top": {
+      "type": "string",
+      "description": "G\u00f3rna cz\u0119\u015b\u0107 nazwy w logo (np. STUDIO)"
+    },
+    "site_name_bottom": {
+      "type": "string",
+      "description": "Dolna cz\u0119\u015b\u0107 nazwy w logo (np. TATTOO)"
+    },
     "hero_video_url": {
       "type": "string"
     },
@@ -44,6 +56,10 @@
     },
     "contact_address_city": {
       "type": "string"
+    },
+    "contact_address_country": {
+      "type": "string",
+      "description": "Kraj studia (np. Polska)"
     },
     "contact_phone": {
       "type": "string"

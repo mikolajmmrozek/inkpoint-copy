@@ -2,18 +2,20 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
+import { useSiteSettings, getCity } from '@/lib/useSiteSettings';
 
 const DEFAULTS = {
   about_heading: 'Sztuka, która',
   about_highlight_word: 'POZOSTAJE',
-  about_paragraph_1: 'Romans Tattoo to studio tatuażu i piercingu w Wolsztynie, gdzie precyzja spotyka pasję. Nasi artyści łączą doświadczenie z nieustannym dążeniem do perfekcji, tworząc dzieła dopasowane do każdego klienta.',
+  about_paragraph_1: 'Studio tatuażu i piercingu, gdzie precyzja spotyka pasję. Nasi artyści łączą doświadczenie z nieustannym dążeniem do perfekcji, tworząc dzieła dopasowane do każdego klienta.',
   about_paragraph_2: 'Każda sesja zaczyna się od rozmowy. Słuchamy, projektujemy, tworzymy.',
   about_image_url: 'https://images.unsplash.com/photo-1565058379802-bbe93b2f703a?w=800&q=85',
   about_stats_number: '4+',
-  about_stats_text: 'W WOLSZTYNIE',
+  about_stats_text: '',
 };
 
 export default function HomeAbout() {
+  const { settings: site } = useSiteSettings();
   const [data, setData] = useState(DEFAULTS);
 
   useEffect(() => {
@@ -27,6 +29,8 @@ export default function HomeAbout() {
   }, []);
 
   const headingLines = data.about_heading.split('\n');
+  // Jeśli admin nie wpisał tekstu statystyki, generujemy "W <MIASTO>" z danych kontaktowych.
+  const statsText = data.about_stats_text || (getCity(site) ? `W ${getCity(site).toUpperCase()}` : 'DOŚWIADCZENIA');
 
   return (
     <section className="py-16 px-8 md:px-16">
@@ -94,7 +98,7 @@ export default function HomeAbout() {
           {/* Stats badge */}
           <div className="absolute top-8 -right-4 bg-obsidian p-6" style={{ background: 'hsl(var(--background))', border: '0.5px solid hsl(var(--border))' }}>
             <p className="font-display text-4xl font-700" style={{ fontFamily: 'var(--font-display)', fontWeight: 400, color: 'var(--brand)', fontSize: '2.5rem', letterSpacing: '0.05em' }}>{data.about_stats_number}</p>
-            <p className="text-micro mt-1" style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: 'rgb(var(--foreground-rgb) / 0.7)', letterSpacing: '0.15em' }}>{data.about_stats_text}</p>
+            <p className="text-micro mt-1" style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: 'rgb(var(--foreground-rgb) / 0.7)', letterSpacing: '0.15em' }}>{statsText}</p>
           </div>
         </motion.div>
       </div>

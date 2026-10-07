@@ -2,14 +2,16 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
+import { useSiteSettings, DEFAULT_SITE, getLocationLabel } from '@/lib/useSiteSettings';
 
 const DEFAULTS = {
-  hero_tagline: 'ROMANS\nTATTOO',
-  hero_subtext: 'Studio tatuażu i piercingu w Wolsztynie.\nSztuka trwała — precyzyjna — Twoja.',
+  hero_tagline: 'STUDIO\nTATTOO',
+  hero_subtext: 'Studio tatuażu i piercingu.\nSztuka trwała — precyzyjna — Twoja.',
   hero_video_url: '',
 };
 
 export default function StudioHero() {
+  const { settings: site } = useSiteSettings();
   const [settings, setSettings] = useState(DEFAULTS);
 
   useEffect(() => {
@@ -20,6 +22,7 @@ export default function StudioHero() {
 
   const lines = (settings.hero_tagline || DEFAULTS.hero_tagline).split('\n');
   const sublines = (settings.hero_subtext || DEFAULTS.hero_subtext).split('\n');
+  const locationLabel = getLocationLabel(site);
 
   return (
     <section className="relative w-full flex items-start" style={{ minHeight: '100dvh' }}>
@@ -62,7 +65,7 @@ export default function StudioHero() {
             transition={{ delay: 0.3, duration: 0.8 }}
             style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--brand)', letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: '24px' }}
           >
-            ◆ &nbsp; WOLSZTYN, POLSKA &nbsp; ◆
+            {locationLabel ? `◆  ${locationLabel}  ◆` : ''}
           </motion.p>
 
           {/* Main headline */}

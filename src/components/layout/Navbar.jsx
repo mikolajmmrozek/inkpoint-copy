@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { User, X } from 'lucide-react';
 import { useAuth } from '@/lib/AuthContext';
 import { base44 } from '@/api/base44Client';
+import { useSiteSettings, DEFAULT_SITE } from '@/lib/useSiteSettings';
 
 export default function Navbar() {
   const { user, isAuthenticated } = useAuth();
@@ -11,6 +12,9 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [artist, setArtist] = useState(null);
   const location = useLocation();
+  const { settings } = useSiteSettings();
+  const logoTop = (settings.site_name_top || DEFAULT_SITE.site_name_top || '').toUpperCase();
+  const logoBottom = (settings.site_name_bottom || DEFAULT_SITE.site_name_bottom || '').toUpperCase();
 
   const displayName = user?.display_name || user?.full_name || artist?.name || '';
   const initials = (displayName.split(' ').filter(Boolean).slice(0, 2).map(w => w[0]).join('') || (user?.email?.[0] || 'U')).toUpperCase();
@@ -61,10 +65,10 @@ export default function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex flex-col leading-none">
             <span className="font-display text-2xl font-700 text-parchment tracking-tight" style={{ fontFamily: 'var(--font-display)', fontWeight: 400, color: forceLightText ? '#F5F0EB' : 'hsl(var(--foreground))', letterSpacing: '0.08em', fontSize: '2.1rem' }}>
-              ROMANS
+              {logoTop}
             </span>
             <span className="text-micro text-oxblood" style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.2em', color: 'var(--brand)' }}>
-              TATTOO
+              {logoBottom}
             </span>
           </Link>
 
@@ -180,8 +184,8 @@ export default function Navbar() {
         {/* Drawer header */}
         <div className="flex items-center justify-between px-6" style={{ height: '72px', borderBottom: '0.5px solid hsl(var(--border))' }}>
           <div className="flex flex-col leading-none">
-            <span style={{ fontFamily: 'var(--font-display)', fontWeight: 400, color: 'hsl(var(--foreground))', letterSpacing: '0.08em', fontSize: '1.4rem' }}>ROMANS</span>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', letterSpacing: '0.2em', color: 'var(--brand)' }}>TATTOO</span>
+            <span style={{ fontFamily: 'var(--font-display)', fontWeight: 400, color: 'hsl(var(--foreground))', letterSpacing: '0.08em', fontSize: '1.4rem' }}>{logoTop}</span>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', letterSpacing: '0.2em', color: 'var(--brand)' }}>{logoBottom}</span>
           </div>
           <button onClick={() => setMenuOpen(false)} aria-label="Zamknij menu" style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'hsl(var(--muted-foreground))', padding: '6px' }}>
             <X size={22} />
