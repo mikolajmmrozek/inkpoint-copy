@@ -1,7 +1,7 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.52';
 import {
   APP_URL, buildAppUrl, sectionStyle, h3Style, pStyle, mutedStyle, linkStyle, buttonStyle,
-  detailRow, clientFirstName, fmtDate, buildContactRows, sendViaGmail,
+  detailRow, clientFirstName, fmtDate, buildContactRows, sendViaGmail, getStudioName,
 } from '../../shared/bookingEmail.ts';
 
 export default async function(req: Request): Promise<Response> {
@@ -151,6 +151,7 @@ export default async function(req: Request): Promise<Response> {
     const firstName = clientFirstName(booking);
     const contactRows = buildContactRows(contact);
 
+    const studioName = await getStudioName(base44);
     const isPendingMode = mode === 'pending';
     const statusLabel = isPendingMode ? 'OCZEKUJE POTWIERDZENIA' : 'POTWIERDZONA';
     const detailRows: string[] = [
@@ -196,7 +197,7 @@ export default async function(req: Request): Promise<Response> {
           <tr>
             <td style="background:#FF007F;padding:28px 32px;">
               <h1 style="margin:0;color:#ffffff;font-size:22px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;font-family:Arial,Helvetica,sans-serif;">${isPendingMode ? 'Otrzymaliśmy Twoje Zgłoszenie' : 'Twoja Rezerwacja Jest Potwierdzona'}</h1>
-              <p style="margin:6px 0 0 0;color:#ffffff;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;opacity:0.95;">Romans Tattoo &middot; Inkflow</p>
+              <p style="margin:6px 0 0 0;color:#ffffff;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;opacity:0.95;">${studioName} &middot; Inkflow</p>
             </td>
           </tr>
 
@@ -265,7 +266,7 @@ export default async function(req: Request): Promise<Response> {
           <tr>
             <td style="padding:24px 32px 28px 32px;">
               <p style="${mutedStyle}">Dziękujemy za zaufanie!</p>
-              <p style="margin:6px 0 0 0;color:#b0b0b0;font-size:11px;">Otrzymujesz tę wiadomość, ponieważ zarezerwowano sesję w Romans Tattoo.</p>
+              <p style="margin:6px 0 0 0;color:#b0b0b0;font-size:11px;">Otrzymujesz tę wiadomość, ponieważ zarezerwowano sesję w ${studioName}.</p>
             </td>
           </tr>
 
@@ -282,13 +283,13 @@ export default async function(req: Request): Promise<Response> {
     const subject = isPendingMode
       ? `Otrzymaliśmy Twoje zgłoszenie rezerwacji — ${dateStr}`
       : `Twoja rezerwacja jest potwierdzona — ${dateStr}`;
-    const fromName = 'Romans Tattoo';
+    const fromName = studioName;
     const fromEmail = 'tattoo.wolsztyn@gmail.com';
     const toEmail = booking.client_email;
 
     // Plain-text alternative (multipart/alternative) for clients that don't render HTML.
     const textBody = [
-      isPendingMode ? `OTRZYMALIŚMY TWOJE ZGŁOSZENIE — ROMANS TATTOO` : `TWOJA REZERWACJA JEST POTWIERDZONA — ROMANS TATTOO`,
+      isPendingMode ? `OTRZYMALIŚMY TWOJE ZGŁOSZENIE — ${studioName.toUpperCase()}` : `TWOJA REZERWACJA JEST POTWIERDZONA — ${studioName.toUpperCase()}`,
       ``,
       `Cześć ${firstName},`,
       isPendingMode

@@ -38,6 +38,18 @@ export const fmtDate = (d: any) =>
 export const fmtPrice = (v: any) =>
   (v == null || v === '') ? '' : `${Number(v).toLocaleString('pl-PL')} PLN`;
 
+// Fetch the studio display name from SiteSettings (key 'branding').
+// Falls back to a generic default if nothing is configured.
+export async function getStudioName(base44: any): Promise<string> {
+  try {
+    const recs = await base44.asServiceRole.entities.SiteSettings.list();
+    const branding = recs.find((r: any) => r.key === 'branding');
+    const name = branding?.site_name;
+    if (name && String(name).trim()) return String(name).trim();
+  } catch (e) { /* ignore */ }
+  return 'Studio Tattoo';
+}
+
 // Build contact rows from studio settings.
 export function buildContactRows(contact: any) {
   const rows: string[] = [];

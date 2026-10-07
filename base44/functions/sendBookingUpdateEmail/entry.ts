@@ -1,7 +1,7 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.52';
 import {
   APP_URL, buildAppUrl, sectionStyle, h3Style, pStyle, mutedStyle, linkStyle, buttonStyle,
-  detailRow, clientFirstName, fmtDate, fmtPrice, buildContactRows, sendViaGmail,
+  detailRow, clientFirstName, fmtDate, fmtPrice, buildContactRows, sendViaGmail, getStudioName,
 } from '../../shared/bookingEmail.ts';
 
 // Fields whose change is meaningful enough to mention in the "co się zmieniło" summary.
@@ -127,6 +127,7 @@ export default async function(req: Request): Promise<Response> {
     currentRows.push(detailRow('Cena', priceText));
 
     const contactRows = buildContactRows(contact);
+    const studioName = await getStudioName(base44);
 
     const htmlBody = `<!DOCTYPE html>
 <html lang="pl">
@@ -145,7 +146,7 @@ export default async function(req: Request): Promise<Response> {
           <tr>
             <td style="background:#FF007F;padding:28px 32px;">
               <h1 style="margin:0;color:#ffffff;font-size:22px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;font-family:Arial,Helvetica,sans-serif;">Twoja Rezerwacja Została Zaktualizowana</h1>
-              <p style="margin:6px 0 0 0;color:#ffffff;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;opacity:0.95;">Romans Tattoo &middot; Inkflow</p>
+              <p style="margin:6px 0 0 0;color:#ffffff;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;opacity:0.95;">${studioName} &middot; Inkflow</p>
             </td>
           </tr>
 
@@ -212,7 +213,7 @@ export default async function(req: Request): Promise<Response> {
           <tr>
             <td style="padding:24px 32px 28px 32px;">
               <p style="${mutedStyle}">W razie pytań prosimy o kontakt ze studiem.</p>
-              <p style="margin:6px 0 0 0;color:#b0b0b0;font-size:11px;">Otrzymujesz tę wiadomość, ponieważ zaktualizowano Twoją rezerwację w Romans Tattoo.</p>
+              <p style="margin:6px 0 0 0;color:#b0b0b0;font-size:11px;">Otrzymujesz tę wiadomość, ponieważ zaktualizowano Twoją rezerwację w ${studioName}.</p>
             </td>
           </tr>
 
@@ -227,7 +228,7 @@ export default async function(req: Request): Promise<Response> {
     const { accessToken } = await base44.asServiceRole.connectors.getConnection('gmail');
 
     const subject = `Aktualizacja rezerwacji — ${dateStr}`;
-    const fromName = 'Romans Tattoo';
+    const fromName = studioName;
     const fromEmail = 'tattoo.wolsztyn@gmail.com';
     const toEmail = booking.client_email;
 
@@ -238,7 +239,7 @@ export default async function(req: Request): Promise<Response> {
     }).join('\n');
 
     const textBody = [
-      `TWOJA REZERWACJA ZOSTAŁA ZAKTUALIZOWANA — ROMANS TATTOO`,
+      `TWOJA REZERWACJA ZOSTAŁA ZAKTUALIZOWANA — ${studioName.toUpperCase()}`,
       ``,
       `Cześć ${firstName},`,
       `Studio zaktualizowało szczegóły Twojej rezerwacji.`,

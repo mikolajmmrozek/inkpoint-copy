@@ -1,7 +1,7 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.52';
 import {
   APP_URL, buildAppUrl, sectionStyle, h3Style, pStyle, mutedStyle, buttonStyle,
-  detailRow, clientFirstName, fmtDate, fmtPrice, buildContactRows, sendViaGmail,
+  detailRow, clientFirstName, fmtDate, fmtPrice, buildContactRows, sendViaGmail, getStudioName,
 } from '../../shared/bookingEmail.ts';
 
 export default async function(req: Request): Promise<Response> {
@@ -92,6 +92,7 @@ export default async function(req: Request): Promise<Response> {
 
     const contactRows = buildContactRows(contact);
     const filledDate = form.form_filled_date ? fmtDate(form.form_filled_date) : '—';
+    const studioName = await getStudioName(base44);
 
     const htmlBody = `<!DOCTYPE html>
 <html lang="pl">
@@ -110,7 +111,7 @@ export default async function(req: Request): Promise<Response> {
           <tr>
             <td style="background:#FF007F;padding:28px 32px;">
               <h1 style="margin:0;color:#ffffff;font-size:22px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;font-family:Arial,Helvetica,sans-serif;">Dziękujemy za Wypełnienie Ankiety</h1>
-              <p style="margin:6px 0 0 0;color:#ffffff;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;opacity:0.95;">Romans Tattoo &middot; Inkflow</p>
+              <p style="margin:6px 0 0 0;color:#ffffff;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;opacity:0.95;">${studioName} &middot; Inkflow</p>
             </td>
           </tr>
 

@@ -1,7 +1,7 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.52';
 import {
   APP_URL, buildAppUrl, sectionStyle, h3Style, pStyle, mutedStyle, buttonStyle,
-  detailRow, clientFirstName, fmtDate, buildContactRows, sendViaGmail,
+  detailRow, clientFirstName, fmtDate, buildContactRows, sendViaGmail, getStudioName,
 } from '../../shared/bookingEmail.ts';
 
 export default async function(req: Request): Promise<Response> {
@@ -61,6 +61,7 @@ export default async function(req: Request): Promise<Response> {
     if (booking.tattoo_placement) detailRows.push(detailRow('Miejsce', booking.tattoo_placement));
 
     const contactRows = buildContactRows(contact);
+    const studioName = await getStudioName(base44);
 
     const htmlBody = `<!DOCTYPE html>
 <html lang="pl">
@@ -79,7 +80,7 @@ export default async function(req: Request): Promise<Response> {
           <tr>
             <td style="background:#FF007F;padding:28px 32px;">
               <h1 style="margin:0;color:#ffffff;font-size:22px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;font-family:Arial,Helvetica,sans-serif;">Twoja Rezerwacja Została Anulowana</h1>
-              <p style="margin:6px 0 0 0;color:#ffffff;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;opacity:0.95;">Romans Tattoo &middot; Inkflow</p>
+              <p style="margin:6px 0 0 0;color:#ffffff;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;opacity:0.95;">${studioName} &middot; Inkflow</p>
             </td>
           </tr>
 
@@ -87,7 +88,7 @@ export default async function(req: Request): Promise<Response> {
           <tr>
             <td style="padding:28px 32px 8px 32px;">
               <p style="${pStyle}">Cześć ${firstName},</p>
-              <p style="${pStyle}">informujemy, że Twoja rezerwacja w Romans Tattoo została anulowana. Poniżej znajdują się szczegóły anulowanej sesji.</p>
+              <p style="${pStyle}">informujemy, że Twoja rezerwacja w ${studioName} została anulowana. Poniżej znajdują się szczegóły anulowanej sesji.</p>
               ${booking.admin_notes ? `<p style="${pStyle}"><strong> Powód:</strong> ${booking.admin_notes}</p>` : ''}
             </td>
           </tr>
@@ -133,7 +134,7 @@ export default async function(req: Request): Promise<Response> {
           <tr>
             <td style="padding:24px 32px 28px 32px;">
               <p style="${mutedStyle}">W razie pytań prosimy o kontakt ze studiem.</p>
-              <p style="margin:6px 0 0 0;color:#b0b0b0;font-size:11px;">Otrzymujesz tę wiadomość, ponieważ anulowano Twoją rezerwację w Romans Tattoo.</p>
+              <p style="margin:6px 0 0 0;color:#b0b0b0;font-size:11px;">Otrzymujesz tę wiadomość, ponieważ anulowano Twoją rezerwację w ${studioName}.</p>
             </td>
           </tr>
 
@@ -148,15 +149,15 @@ export default async function(req: Request): Promise<Response> {
     const { accessToken } = await base44.asServiceRole.connectors.getConnection('gmail');
 
     const subject = `Twoja rezerwacja została anulowana — ${dateStr}`;
-    const fromName = 'Romans Tattoo';
+    const fromName = studioName;
     const fromEmail = 'tattoo.wolsztyn@gmail.com';
     const toEmail = booking.client_email;
 
     const textBody = [
-      `TWOJA REZERWACJA ZOSTAŁA ANULOWANA — ROMANS TATTOO`,
+      `TWOJA REZERWACJA ZOSTAŁA ANULOWANA — ${studioName.toUpperCase()}`,
       ``,
       `Cześć ${firstName},`,
-      `informujemy, że Twoja rezerwacja w Romans Tattoo została anulowana.`,
+      `informujemy, że Twoja rezerwacja w ${studioName} została anulowana.`,
       booking.admin_notes ? `Powód: ${booking.admin_notes}` : '',
       ``,
       `Anulowana sesja:`,
